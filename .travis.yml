@@ -37,3 +37,11 @@ after_success:
 - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
 - docker push $REPO 
 
+# check for tag:
+#after_success:
+#  if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) && 
+#      [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+#    echo "This will deploy!"
+#  else
+#    echo "This will not deploy!"
+#  fi
