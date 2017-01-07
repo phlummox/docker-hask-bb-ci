@@ -21,14 +21,17 @@ env:
   - secure: "nf1IBnFwd78Y8OR16xPFzs+eTzoTn9soOFLpMnSpy77Rw9a3doQHustgsfDAlj4sUJ50Zm2O78ePRCB0opL9iet0pZmjQeWU0UTIc0rL9F0teo8wxqlDK6Nh6TQTqfZVivsEBWJl5415mb76riKjnB2CtwkbsC4LhlEvryT9bpi74Btkj5rmcwsCsZA0O3JImt55IK9U7w7iQOXS5zn9nG9bGxZfBRJVCNtMv0XYkdPa8dPZ+S3+k5bg7VpnrSm9GLnUNHmSOUk35nIiazR2F0MQ61qEiVdUjbQkhAGJaWPGGVVOAWV+fJhSpDq0wgTyuapQsfnN04GhDm1yyub3DP47l/QHZHgrkasMNqb6u2GMvo4GRZbYqH3FkrPw67f/ZLteHwaHtEP+cYtzGLMNS2opi262TOTXG3XC1pER+UqCi/1pIIoIowkRCkFBRUBo9V9nC5kLm9yMGwz+rdVSQgsDfk/NnSyMRJHuQGQItt5H/DaGMhE45HJJipBRAu9fc6rTXRtwrSYBrathhaoD0i46+4VdRf2GY2b6md46I2HVh3wcapLkyc3CSlG6j4QiABk1yqwv9q2mskXmuCzgP2iNfC0jn21lG0Vqx26/j86NJk/H9qatp6JzRmePbpXJW0E4s8kqYGHDABPNqJEz8BHXFkc0UJO7KK8amr+C56I="
 
 install:
-- docker build -t phlummox/hask-bb-ci:precise-v0.1 . 
+- echo "hi"
 
 script:
-- export result=$(docker images -q "$REPO":"$TAG");
-- echo "$result"
-- bash -c "[ ! -z $result ]"
+- docker build -t phlummox/hask-bb-ci:precise-v0.1 . 
+#- docker images 
+#- docker images -q "$REPO":"$TAG"
+#- echo "$result"
+#- bash -c "[ ! -z $result ]"
 
 after_success:
 - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-- docker push "$REPO":"$TAG" 
+- echo "hi"
+#- docker push "$REPO":"$TAG" 
 
