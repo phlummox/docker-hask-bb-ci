@@ -24,8 +24,9 @@ install:
 - docker build -t phlummox/hask-bb-ci:precise-v0.1 . 
 
 script:
-- result=$(docker images -q "$REPO":"$TAG");
-- [ ! -z "$result" ]
+- export result=$(docker images -q "$REPO":"$TAG");
+- echo "$result"
+- bash -c "[ ! -z $result ]"
 
 after_success:
 - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
