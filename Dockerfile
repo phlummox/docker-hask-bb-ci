@@ -44,6 +44,10 @@ RUN : "init cabal, install stack" && \
   curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack' && \
   stack setup
 
+RUN : "setup stack lts-6 and lts-7" && \
+  stack setup --resolver lts-6 && \
+  stack setup --resolver lts-7 
+
 
 #WORKDIR /home
 
