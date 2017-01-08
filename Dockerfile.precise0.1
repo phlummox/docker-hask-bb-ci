@@ -13,7 +13,37 @@ RUN : "handy packages" && \
     python-software-properties \
     r-base-dev \
     software-properties-common \
-    wget        
+    sudo \
+    wget   
+
+RUN : "useful build tools" && \
+  sudo apt-get -y \ 
+    alien             \
+    binutils          \
+    bsdmainutils      \
+    build-essential   \
+    coreutils         \
+    cpio              \
+    diffutils         \
+    dns-utils         \
+    fakeroot          \
+    file              \
+    findutils         \
+    gawk              \
+    gnupg             \
+    install           \
+    kernel-package    \
+    less              \
+    make              \
+    netcat            \
+    net-tools         \
+    patchutils        \
+    rsync             \
+    sudo              \
+    sudo              \
+    tar               \
+    vim-tiny                            
+
 
 RUN : "haskell repos" && \
   add-apt-repository -y ppa:hvr/ghc && \

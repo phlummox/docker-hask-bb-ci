@@ -1,7 +1,5 @@
 FROM phlummox/hask-bb-ci:precise0.2
 
-RUN : "useful apps" && \
-  sudo apt-get install -y coreutils tar fakeroot alien binutils build-essential dns-utils bsdmainutils diffutils findutils sudo patchutils file make gawk rsync kernel-package cpio gnupg less net-tools netcat vim-tiny
 
 RUN : "setup stack lst-4 and lts-5" && \
   stack setup --resolver lts-5 && \
