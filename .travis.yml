@@ -39,6 +39,7 @@ after_success:
   echo branch "$TRAVIS_BRANCH"
   echo tag "$TRAVIS_TAG"
   echo pull req "$TRAVIS_PULL_REQUEST"
+  ls -al ./deploy.sh
   set +ex
 #  # ugh. travis cannot, in fact, determine what branch we're on -
 #  # "$TRAVIS_BRANCH" just gets overwritten with the tag name -
@@ -55,7 +56,7 @@ deploy:
   script: ./deploy.sh
   skip_cleanup: true
   on:
-    branch: master
+    #branch: master
     tags: true
-    #all_branches: true
+    all_branches: true
     repo: phlummox/docker-hask-bb-ci

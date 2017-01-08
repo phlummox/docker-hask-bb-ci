@@ -1,6 +1,8 @@
 FROM ubuntu:precise
 
-RUN apt-get update
+RUN echo "foo" > foo
+
+#RUN apt-get update
 
 ## the software-properties packages are needed for add-apt-repository
 ## r-base-dev has a good selection of ubuntu -dev libraries

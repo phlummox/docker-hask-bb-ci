@@ -1,6 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 set -x
+
+ls -al
 
 docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 docker tag $REPO:$COMMIT $REPO:$DOCKER_TAG
