@@ -39,7 +39,10 @@ after_success:
   echo  "$TRAVIS_BRANCH"
   echo  "$TRAVIS_TAG"
   echo  "$TRAVIS_PULL_REQUEST"
-  if [ "$TRAVIS_BRANCH" == "master" ] && [ ! -z "$TRAVIS_TAG" ] && 
+  # ugh. travis cannot, in fact, determine what branch we're on -
+  # "$TRAVIS_BRANCH" just gets overwritten with the tag name -
+  # so we'll do without the test. TODO: investigate script deployment.
+  if [ ! -z "$TRAVIS_TAG" ] && 
      [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     docker push $REPO 
   else
