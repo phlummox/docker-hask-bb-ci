@@ -35,13 +35,14 @@ after_success:
 - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 - docker tag $REPO:$COMMIT $REPO:$TAG
 - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-- docker push $REPO 
+# only do a push when we're on the master branch,
+# this is a tag, and it wasn't a pull request
+- | 
+  set -ex
+  if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) && 
+     [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    docker push $REPO 
+  else
+    echo "Built but no deploying"
+  fi
 
-# check for tag:
-#after_success:
-#  if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) && 
-#      [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-#    echo "This will deploy!"
-#  else
-#    echo "This will not deploy!"
-#  fi
