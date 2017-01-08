@@ -36,7 +36,10 @@ after_success:
 # this is a tag, and it wasn't a pull request
 - | 
   set -ex
-  if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) && 
+  echo  "$TRAVIS_BRANCH"
+  echo  "$TRAVIS_TAG"
+  echo  "$TRAVIS_PULL_REQUEST"
+  if [ "$TRAVIS_BRANCH" == "master" ] && [ ! -z "$TRAVIS_TAG" ] && 
      [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     docker push $REPO 
   else
