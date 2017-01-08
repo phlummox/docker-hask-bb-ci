@@ -36,16 +36,28 @@ after_success:
 # this is a tag, and it wasn't a pull request
 - | 
   set -ex
-  echo  "$TRAVIS_BRANCH"
-  echo  "$TRAVIS_TAG"
-  echo  "$TRAVIS_PULL_REQUEST"
-  # ugh. travis cannot, in fact, determine what branch we're on -
-  # "$TRAVIS_BRANCH" just gets overwritten with the tag name -
-  # so we'll do without the test. TODO: investigate script deployment.
-  if [ ! -z "$TRAVIS_TAG" ] && 
-     [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-    docker push $REPO 
-  else
-    echo "Built but not deploying"
-  fi
+  echo branch "$TRAVIS_BRANCH"
+  echo tag "$TRAVIS_TAG"
+  echo pull req "$TRAVIS_PULL_REQUEST"
+  set +ex
+#  # ugh. travis cannot, in fact, determine what branch we're on -
+#  # "$TRAVIS_BRANCH" just gets overwritten with the tag name -
+#  # so we'll do without the test. TODO: investigate script deployment.
+#  if [ ! -z "$TRAVIS_TAG" ] && 
+#     [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+#    docker push $REPO 
+#  else
+#    echo "Built but not deploying"
+#  fi
+
+deploy:
+  provider: script
+  script: ./deploy.sh
+  on:
+    branch: master
+    tags: true
+    #all_branches: true
+    repo: phlummox/hask-bb-ci
+
+
 
