@@ -17,7 +17,7 @@ RUN : "handy packages" && \
     wget   
 
 RUN : "useful build tools" && \
-  sudo apt-get -y \ 
+  apt-get install -y \ 
     alien             \
     binutils          \
     bsdmainutils      \
@@ -31,7 +31,6 @@ RUN : "useful build tools" && \
     findutils         \
     gawk              \
     gnupg             \
-    install           \
     kernel-package    \
     less              \
     make              \
