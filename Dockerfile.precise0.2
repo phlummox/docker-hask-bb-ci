@@ -1,0 +1,10 @@
+FROM phlummox/hask-bb-ci:precise0.1
+
+RUN : "setup stack lts-6 and lts-7" && \
+  stack setup --resolver lts-6 && \
+  stack setup --resolver lts-7 
+
+
+
+
+

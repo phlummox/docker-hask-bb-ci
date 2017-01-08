@@ -14,7 +14,7 @@ python:
 env:
   global: 
   - REPO=phlummox/hask-bb-ci
-  - TAG=precise0.1
+  - DOCKER_TAG=precise0.2
   - COMMIT=${TRAVIS_COMMIT::8}
   # DOCKER_USER
   - secure: "JEtUEScS8FQIRfQEn5S56chpelyMu1if0Oc4VJiTJvcndkrDyYxV14OjiK+AEbHehXZ02YxJf+zyhfYujFFXGyUxok39QJ5e8CIF2EUGPSmH3vx2ZwdEfD6nYvY01GeqVH8BzASIBie9X0bo1R58byMhXo4OztY6M4zaSTDU+7pamMeMhGeuHDzkUONirgPiQuToZISnc1SoMUyR6JvC1qR/+IEfpIU1nCTYxYAzy32HIDdmp+bDGB1SI3XjMogzao70Y0ZtcJtNoWw8ZSdO1FjZPc/zUW6osre2SSkTBOy+5BXUZrJcxxCdJwfYYosR6eXKy/1xHIWu2E1E7K2RQcGvYXhtBIb1sDeZ+BkSj+jcDO+bPLNNGsvWVGOzzlE7cd6Tys3Cdt1rcIoGVDXkfcKIxZMHRWUgZ6FgK9VYgz5Fqvgspg4A/gkyPlecNe+FfOknTJ2Up3tjKZJOIjN1zwa63S7NorPw2MJ3XTnQ9oJco9JmN3BFuf9Oz6h61sbm1iMhQjqlwOw7iSzlxPXFIfcw131dnBoH8DikbYz7L2BnnbKLDPAPsilUhsuMrDn9o418IXtfFVee3+RZ+oxdmqM3F0tUIDOExmbeaWOYZ0erljfSihOn+XKf/mbiZOYuwPAHMV+PX3Msy3oAwSRemovAZLsQ+CaQvo0vJ9NJPGg=" 
@@ -25,16 +25,13 @@ install:
 - echo "hi"
 
 script:
-- docker build -f Dockerfile -t $REPO:$COMMIT . 
-#- docker images 
-#- docker images -q "$REPO":"$TAG"
-#- echo "$result"
-#- bash -c "[ ! -z $result ]"
+- docker build -f Dockerfile.$DOCKER_TAG -t $REPO:$COMMIT . 
 
 after_success:
 - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-- docker tag $REPO:$COMMIT $REPO:$TAG
+- docker tag $REPO:$COMMIT $REPO:$DOCKER_TAG
 - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+- docker tag $REPO:$COMMIT $REPO:latest
 # only do a push when we're on the master branch,
 # this is a tag, and it wasn't a pull request
 - | 
@@ -43,6 +40,6 @@ after_success:
      [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     docker push $REPO 
   else
-    echo "Built but no deploying"
+    echo "Built but not deploying"
   fi
 
